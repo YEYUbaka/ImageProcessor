@@ -1,0 +1,189 @@
+/* ===============================
+   全局窗口
+   =============================== */
+QMainWindow {
+    background-color: #f3f4f6;
+}
+
+QWidget {
+    font-family: "Segoe UI", "Microsoft YaHei", Arial;
+    font-size: 10pt;
+    color: #000000;
+}
+
+/* ===============================
+   按钮风格
+   =============================== */
+QPushButton, QToolButton {
+    background-color: #ffffff;
+    border: 1px solid #d4d4d4;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #f0f0f0;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #e6e6e6;
+    border: 1px solid #c6c6c6;
+}
+
+/* ===============================
+   GroupBox / Panel
+   =============================== */
+QGroupBox {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0px 4px;
+    color: #333333;
+    font-weight: bold;
+}
+
+/* ===============================
+   标签（Label）
+   =============================== */
+QLabel {
+    color: #000000;
+}
+
+PreviewLabel {
+    background-color: #1e1e1e;
+}
+
+/* ===============================
+   滚动区
+   =============================== */
+QScrollArea {
+    border: none;
+}
+
+/* ===============================
+   滑动条（Slider）
+   =============================== */
+QSlider::groove:horizontal {
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+    background: #ffffff;
+    border: 1px solid #bdbdbd;
+    width: 16px;
+    height: 16px;
+    margin: -4px 0;
+    border-radius: 8px;
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: #f8f8f8;
+}
+
+/* ===============================
+   输入框（LineEdit）
+   =============================== */
+QLineEdit {
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 4px;
+    background-color: #ffffff;
+}
+
+QLineEdit:focus {
+    border: 1px solid #528bff;
+    background-color: #ffffff;
+}
+
+/* ===============================
+   SpinBox
+   =============================== */
+QSpinBox {
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+QSpinBox:focus {
+    border: 1px solid #528bff;
+}
+
+/* ===============================
+   ComboBox
+   =============================== */
+QComboBox {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+QComboBox:hover {
+    border: 1px solid #b0b0b0;
+}
+
+QComboBox:focus {
+    border: 1px solid #528bff;
+}
+
+QComboBox::drop-down {
+    border: none;
+}
+
+/* ===============================
+   下拉菜单（Menu）
+   =============================== */
+QMenu {
+    background-color: #ffffff;
+    border: 1px solid #d4d4d4;
+}
+
+QMenu::item {
+    padding: 6px 20px;
+}
+
+QMenu::item:selected {
+    background-color: #e6e6e6;
+}
+
+/* ===============================
+   滚动条（ScrollBar）
+   =============================== */
+QScrollBar:vertical {
+    background: #f1f1f1;
+    width: 10px;
+    margin: 0;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: #d0d0d0;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #c4c4c4;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background: none;
+    height: 0;
+}
+
+/* ===============================
+   状态栏
+   =============================== */
+QStatusBar {
+    background-color: #fafafa;
+    border-top: 1px solid #e1e1e1;
+}
