@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
     QGroupBox, QSlider, QSpinBox, QLineEdit, QComboBox, QMessageBox, QStyle
 )
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtGui import QPixmap, QImage, QAction
+from PyQt6.QtGui import QPixmap, QImage, QAction, QIcon
 
 from image_tools import ImageTools
 
@@ -40,7 +40,6 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("简易图片处理工具")
         self.setMinimumSize(1000, 640)
-
         self.original_image = None
         self.current_image = None
         self.history = []
@@ -64,6 +63,8 @@ class MainWindow(QMainWindow):
         layout = QHBoxLayout(central)
 
         # ========== 左侧工具栏 ==========
+        icons_dir = os.path.join(os.path.dirname(__file__), "..", "icons")
+
         left = QVBoxLayout()
         left_widget = QWidget()
         left_widget.setLayout(left)
@@ -72,13 +73,13 @@ class MainWindow(QMainWindow):
 
         self.btn_open = QToolButton()
         self.btn_open.setText("打开")
-        self.btn_open.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogOpenButton))
+        self.btn_open.setIcon(QIcon(os.path.join(icons_dir, "open.png")))
         self.btn_open.clicked.connect(self.open_image)
         left.addWidget(self.btn_open)
 
         self.btn_save = QToolButton()
         self.btn_save.setText("保存")
-        self.btn_save.setIcon(self.style().standardIcon(QStyle.StandardPixmap.SP_DialogSaveButton))
+        self.btn_save.setIcon(QIcon(os.path.join(icons_dir, "save.png")))
         self.btn_save.clicked.connect(self.save_image)
         left.addWidget(self.btn_save)
 
@@ -103,19 +104,27 @@ class MainWindow(QMainWindow):
         self.preview_label = QLabel("无图片")
         self.preview_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.preview_label.setStyleSheet("background:#1e1e1e;color:white;")
-        self.preview_label.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
+        self.preview_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.scroll.setWidget(self.preview_label)
 
         preview_layout.addWidget(self.scroll)
         self.status_label = QLabel("就绪")
+        self.status_label.setWordWrap(True)
         preview_layout.addWidget(self.status_label)
 
-        # ========== 右侧参数区 ==========
-        right = QVBoxLayout()
+        # ========== 右侧参数区（带滚动） ==========
+        right_scroll = QScrollArea()
+        right_scroll.setWidgetResizable(True)
+        right_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        right_scroll.setFixedWidth(300)
+        layout.addWidget(right_scroll)
+
         right_widget = QWidget()
+        right_widget.setObjectName("rightPanel")  # <<< 新增：右侧整体面板的名字
+        right = QVBoxLayout(right_widget)
         right_widget.setLayout(right)
-        right_widget.setFixedWidth(300)
-        layout.addWidget(right_widget)
+
+        right_scroll.setWidget(right_widget)
 
         # 缩放组
         s_group = QGroupBox("缩放")
