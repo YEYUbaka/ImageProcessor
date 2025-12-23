@@ -120,7 +120,7 @@
 
 1. **克隆或下载项目**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/YEYUbaka/ImageProcessor.git
    cd Python课程设计
    ```
 
