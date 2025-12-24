@@ -2046,13 +2046,16 @@ class MainWindow(QMainWindow):
             return
         
         # 确认对话框
-        reply = QMessageBox.question(
-            self, 
-            "确认重置", 
-            "确定要重置所有效果吗？这将清除所有已应用的操作（旋转、缩放、滤镜、水印、裁剪等）。",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No
-        )
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("确认重置")
+        msg_box.setText("确定要重置所有效果吗？这将清除所有已应用的操作（旋转、缩放、滤镜、水印、裁剪等）。")
+        msg_box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msg_box.setDefaultButton(QMessageBox.StandardButton.No)
+        # 设置按钮文本为中文
+        msg_box.button(QMessageBox.StandardButton.Yes).setText("是")
+        msg_box.button(QMessageBox.StandardButton.No).setText("否")
+        
+        reply = msg_box.exec()
         
         if reply != QMessageBox.StandardButton.Yes:
             return
@@ -2634,7 +2637,18 @@ class BatchProcessDialog(QDialog):
         )
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
+        # 设置按钮文本为中文
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("确定")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("取消")
         layout.addWidget(buttons)
+
+    def accept(self):
+        self.input_folder = self.input_folder_edit.text()
+        self.output_folder = self.output_folder_edit.text()
+        self.theme = self.theme_combo.currentText()
+        self.rename = self.rename_check.isChecked()
+        self.rename_prefix = self.rename_prefix_edit.text()
+        super().accept()
 
     def select_input_folder(self):
         folder = QFileDialog.getExistingDirectory(self, "选择输入文件夹")
@@ -2703,6 +2717,9 @@ class AppearanceDialog(QDialog):
         )
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
+        # 设置按钮文本为中文
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("确定")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("取消")
         layout.addWidget(buttons)
 
     def accept(self):

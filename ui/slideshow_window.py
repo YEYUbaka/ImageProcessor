@@ -734,6 +734,9 @@ class SlideshowSelectionDialog(QDialog):
         )
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
+        # 设置按钮文本为中文
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("确定")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("取消")
         layout.addWidget(buttons)
         
         # 如果父窗口有当前图片，自动添加
